@@ -8,6 +8,12 @@ from matplotlib import pyplot
 filename = 'evened_data.csv' # change if necessary
 df = pandas.read_csv(filename)
 df.drop(['Systolic 1', 'Diastolic 1', 'Weight 1', 'Rate 1', 'Oxygen 1', 'Systolic 2', 'Diastolic 2', 'Weight 2', 'Rate 2', 'Oxygen 2', 'Systolic 3', 'Diastolic 3', 'Weight 3', 'Rate 3', 'Oxygen 3'], axis='columns', inplace=True)
+
+# pick and choose which statistics to use
+df.drop(['systolic_m','diastolic_m','weight_m','rate_m','oxygen_m'], axis='columns', inplace=True) # drop means
+df.drop(['systolic_t','diastolic_t','weight_t','rate_t','oxygen_t'], axis='columns', inplace=True) # drop differences
+df.drop(['systolic_c','diastolic_c','weight_c','rate_c','oxygen_c'], axis='columns', inplace=True) # drop % change
+
 input = df.drop('Risk', axis='columns')
 target = df['Risk']
 input_train, input_test, output_train, output_test = sklearn.model_selection.train_test_split(input, target, test_size=0.3)
